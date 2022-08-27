@@ -40,16 +40,10 @@ export default {
     Pane
   },
   mounted() {
-    fetch("https://raw.githubusercontent.com/json-iterator/test-data/master/large-file.json").then(res => {
-      {
-        res.text().then(text => {
-          this.jsonValue = text
-        })
-      }
-    })
     worker.addEventListener('message', (e) => {
       this.result = e.data
     })
+    search({jsonStr: this.jsonValue, expression: this.expression});
   },
   watch: {
     expression() {
